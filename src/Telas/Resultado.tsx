@@ -1,4 +1,4 @@
-import { Text,ImageBackground,StyleSheet,View,Keyboard,FlatList,Image,Dimensions } from "react-native";
+import { Text,ImageBackground,StyleSheet,View,Keyboard,FlatList,Image,Dimensions,TouchableOpacity } from "react-native";
 import React from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 import {useState} from 'react'
@@ -11,7 +11,7 @@ const IMAGE_WIDTH = width
 
 const TelaResultado = ({route,navigation}) =>{
     const escolha = route.params.escolha;
-    const link = `https://api.giphy.com/v1/${escolha}/search`
+    const link = `http://api.giphy.com/v1/${escolha}/search`
     const[text,setText]=useState("")
     const[data,setData]=useState([])
 
@@ -52,10 +52,12 @@ const TelaResultado = ({route,navigation}) =>{
                     numColumns={2}
                     renderItem={({item})=>{
                         return(
-                           <Image 
-                                source={{uri:item.images.preview_gif.url}}
-                                style={estilo.image}
-                           />
+                            <TouchableOpacity onPress={()=>navigation.navigate("TelaDetalhes",{item: item })}>
+                                <Image 
+                                    source={{uri:item.images.preview_gif.url}}
+                                    style={estilo.image}
+                                />
+                           </TouchableOpacity>
                         )
                     }}
                 />
