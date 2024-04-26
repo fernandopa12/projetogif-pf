@@ -26,7 +26,10 @@ const TelaDetalhes = (props)=>{
 
                 <Image 
                     source={{uri:data.images.original.url}}
-                    style={{flex:1}}
+                    style={{
+                        width:parseInt(data.images.original.width),
+                        height:parseInt(data.images.original.height)
+                    }}
                 />
 
                 <Text style={estilo.texto}>{data.title}</Text>

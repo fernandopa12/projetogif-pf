@@ -2,8 +2,13 @@ import React from "react"
 import { View, Text, StyleSheet, TextInput } from 'react-native'
 import { Ionicons } from 'react-native-vector-icons'
 
+let textoPesquisado = ""
+
 const Cabecalho = ({navigation,text,setText,solicitar}) => {
+    
     return (
+        
+        <View>
         <View style={estilo.cabecalho}>
             <Ionicons
                 name="chevron-back"
@@ -18,15 +23,25 @@ const Cabecalho = ({navigation,text,setText,solicitar}) => {
                 autoCorrect={false}
                 value={text}
                 onChangeText={(value) => setText(value)}
-                onSubmitEditing={() => solicitar(text)}
+                onSubmitEditing={() => {
+                    solicitar(text)
+                    textoPesquisado = text
+                
+                }}
 
             />
             <Ionicons
                 name='search'
                 size={40}
                 color='white'
-                onPress={() => solicitar(text)}
+                onPress={() => {
+                    solicitar(text)
+                    textoPesquisado = text
+                
+                }}
             />
+        </View>
+            {textoPesquisado!==""?<Text style={estilo.textoBusca}>Mostrando resultado para: <Text style={{fontWeight:'bold'}}>{textoPesquisado}</Text></Text> : null}    
         </View>
     )
 }
@@ -40,7 +55,13 @@ const estilo = StyleSheet.create({
     input:{
         backgroundColor:'white',
         flex:1,
-        borderRadius:25
+        borderRadius:25,
+        fontSize:25,
+        paddingLeft:10
+    },
+    textoBusca:{
+        fontSize:20,
+        color:'white'
     }
 })
 
